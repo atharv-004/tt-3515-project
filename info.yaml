@@ -15,14 +15,14 @@ project:
   
   # List your project's source files here. Source files must be in ./src and you must list each source file separately, one per line:
   source_files:        
-    - "project.v"
+    - "projectFile.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
+  ui[0]: "x"
+  ui[1]: "clk"
+  ui[2]: "reset"
   ui[3]: ""
   ui[4]: ""
   ui[5]: ""
@@ -30,14 +30,14 @@ pinout:
   ui[7]: ""
 
   # Outputs
-  uo[0]: ""
-  uo[1]: ""
-  uo[2]: ""
-  uo[3]: ""
-  uo[4]: ""
-  uo[5]: ""
-  uo[6]: ""
-  uo[7]: ""
+  uo[0]: "seg[0]"
+  uo[1]: "seg[1]"
+  uo[2]: "seg[2]"
+  uo[3]: "seg[3]"
+  uo[4]: "seg[4]"
+  uo[5]: "seg[5]"
+  uo[6]: "seg[6]"
+  uo[7]: "seg[7]"
 
   # Bidirectional pins
   uio[0]: ""
