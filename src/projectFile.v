@@ -9,15 +9,20 @@ module tt_um_3515_sequenceDetector (
     input  wire [7:0] ui_in,    // Dedicated inputs
     output wire [7:0] uo_out    // Dedicated outputs
 );
-
+    wire x = ui_in[0];
+    wire clk = ui_in[1];
+    wire reset = ui_in[2];
+    
     reg [7:0] seg;
     reg [1:0] PS, NS;
     reg z;
 
+    assign uo_out = seg[7:0];
+
     parameter S0=0, S1=1, S2=2, S3=3;
 
-    always @(posedge ui_in[1] or posedge ui_in[2] or posedge ui_in[2]) begin
-        if (ui_in[2]) begin
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
             PS <= S0;
             z <= 0;
         end else begin
@@ -26,12 +31,12 @@ module tt_um_3515_sequenceDetector (
         end
     end
 
-    always @* begin
+    always @(*) begin
         case (PS)
-            S0: NS = ui_in[0] ? S0 : S1;
-            S1: NS = ui_in[0] ? S2 : S1;
-            S2: NS = ui_in[0] ? S3 : S1;
-            S3: NS = ui_in[0] ? S0 : S1;
+            S0: NS = x ? S0 : S1;
+            S1: NS = x ? S2 : S1;
+            S2: NS = x ? S3 : S1;
+            S3: NS = x ? S0 : S1;
         endcase
     end
 
@@ -41,7 +46,5 @@ module tt_um_3515_sequenceDetector (
             1: seg = 8'b11111111; // Display 8. on 7-segment (sequence detected)
         endcase;
     end
-
-    assign uo_out = seg;
 
 endmodule
