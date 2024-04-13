@@ -17,11 +17,11 @@ Explain how your project works
 ## How to test
 
 Explain how to use your project
-- If the sequence is detected, the output is set to logic 1 that displays '8.' on 7-segment display
+- If the sequence is detected, the output register x is set to logic 1 that displays '8.' on 7-segment display
 - If the sequence is not detected or the output is 0, 7-segment display shows '-'
 
 ## External hardware
 
 List external hardware used in your project (e.g. PMOD, LED display, etc), if any
 - We need to use LED display for 7-segment display output so that the output can be confirmed
-- In addition to this, we need to use an input source from which we can manipulate input logic onto the input register
+- In addition to this, we need to use an input source from which we can manipulate input logic onto the input register x
