@@ -17,7 +17,7 @@ Explain how your project works
 ## How to test
 
 Explain how to use your project
-- If the sequence is detected, the output is set to logic 1 that displays '8' on 7-segment display
+- If the sequence is detected, the output is set to logic 1 that displays '8.' on 7-segment display
 - If the sequence is not detected or the output is 0, 7-segment display shows '-'
 
 ## External hardware
