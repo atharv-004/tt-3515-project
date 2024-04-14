@@ -3,6 +3,15 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+/*
+    ___ 3
+4 |     |
+  | ___ |2
+  |  7  |
+5 | ___ |1  . 8
+     6
+*/
+
 `define default_netname none
 
 module tt_um_3515_sequenceDetector (
@@ -17,7 +26,7 @@ module tt_um_3515_sequenceDetector (
     reg [1:0] PS, NS;
     reg z;
 
-    assign uo_out = seg[7:0];
+    assign uo_out = seg;
 
     parameter S0=0, S1=1, S2=2, S3=3;
 
