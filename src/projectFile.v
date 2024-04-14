@@ -30,7 +30,11 @@ module tt_um_3515_sequenceDetector (
     reg [7:0] seg;
     reg [1:0] PS, NS;
     reg z;
-
+      
+    wire x = ui_in[0];
+    assign clk = ui_in[1];
+    assign rst_n = ui_in[2];
+      
     assign uo_out = seg;
     assign uio_out = 8'b0;
     assign uio_oe = 8'b0;
@@ -47,10 +51,10 @@ module tt_um_3515_sequenceDetector (
 
     always @(*) begin
         case (PS)
-            2'b00: NS <= ui_in[0] ? 2'b00 : 2'b01; // S0
-            2'b01: NS <= ui_in[0] ? 2'b10 : 2'b01; // S1
-            2'b10: NS <= ui_in[0] ? 2'b11 : 2'b01; // S2
-            2'b11: NS <= ui_in[0] ? 2'b00 : 2'b01; // S3
+            2'b00: NS <= x ? 2'b00 : 2'b01; // S0
+            2'b01: NS <= x ? 2'b10 : 2'b01; // S1
+            2'b10: NS <= x ? 2'b11 : 2'b01; // S2
+            2'b11: NS <= x ? 2'b00 : 2'b01; // S3
         endcase
     end
 
