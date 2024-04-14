@@ -32,8 +32,6 @@ module tt_um_3515_sequenceDetector (
     reg z;
       
     wire x = ui_in[0];
-    assign clk = ui_in[1];
-    assign rst_n = ui_in[2];
       
     assign uo_out = seg;
     assign uio_out = 8'b0;
@@ -51,17 +49,17 @@ module tt_um_3515_sequenceDetector (
 
     always @(*) begin
         case (PS)
-            2'b00: NS <= x ? 2'b00 : 2'b01; // S0
-            2'b01: NS <= x ? 2'b10 : 2'b01; // S1
-            2'b10: NS <= x ? 2'b11 : 2'b01; // S2
-            2'b11: NS <= x ? 2'b00 : 2'b01; // S3
+            2'b00: NS <= x ? 2'b01 : 2'b00; // S0, Next state is S1 if x is 1, else remain in S0
+            2'b01: NS <= x ? 2'b01 : 2'b10; // S1, Next state is S1 if x is 1, else transition to S2
+            2'b10: NS <= x ? 2'b00 : 2'b11; // S2, Next state is S3 if x is 0, else return to S0
+            2'b11: NS <= x ? 2'b00 : 2'b00; // S3, Always return to S0
         endcase
     end
 
     always @(*) begin
         case (z)
-            1'b0: seg = 8'b00000010; // Display - on 7-segment (sequence not detected)
-            1'b1: seg = 8'b11111111; // Display 8. on 7-segment (sequence detected)
+            1'b0: seg = 8'b00000010; // Display '-' on 7-segment (sequence not detected)
+            1'b1: seg = 8'b11111111; // Display '8.' on 7-segment (sequence detected)
         endcase;
     end
 
