@@ -22,7 +22,7 @@ pinout:
   # Inputs
   ui[0]: "x"
   ui[1]: "clk"
-  ui[2]: "reset"
+  ui[2]: "rst_n"
   ui[3]: ""
   ui[4]: ""
   ui[5]: ""
