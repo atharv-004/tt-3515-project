@@ -33,7 +33,7 @@ module tt_um_3515_sequenceDetector (
     reg [7:0] ena_replicated; // Replicated version of ena to match width
 
       reg [7:0] seg_test = uio_in[7:0];
-      reg [6:0] condition = uio_in[7:1];
+      reg [6:0] condition = ui_in[7:1];
       
       always @(*) begin
           if (condition == 7'b1111111) begin
