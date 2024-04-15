@@ -17,29 +17,12 @@
 
 `define default_netname none
 
-/*
- * Copyright (c) 2024 Your Name
- * SPDX-License-Identifier: Apache-2.0
- */
-
-/*
-      -- 3 --
-     |       |
-     4       2
-     |       |
-      -- 7 --
-     |       |
-     5       1
-     |       |
-      -- 6 --    . 8
-*/
-
-`define default_netname none
-
 module tt_um_3515_sequenceDetector (
+    // verilator lint_off UNUSED
     input  wire [7:0] ui_in,    // Dedicated inputs
-    output wire [7:0] uo_out,   // Dedicated outputs
     input  wire [7:0] uio_in,   // IOs: Input path
+    // verilator lint_on
+    output wire [7:0] uo_out,   // Dedicated outputs
     output wire [7:0] uio_out,  // IOs: Output path
     output wire [7:0] uio_oe,   // IOs: Enable path (active high: 0=input, 1=output)
     input  wire       ena,      // will go high when the design is enabled
@@ -50,8 +33,6 @@ module tt_um_3515_sequenceDetector (
     reg [1:0] PS, NS = 2'b00; // Initialize NS to avoid latch
     reg z;
     reg [7:0] ena_replicated; // Replicated version of ena to match width
-    reg [7:0] ui_in_internal; // Internal signal utilizing ui_in[7:1]
-    reg [7:0] uio_in_internal; // Internal signal utilizing uio_in
       
     wire x = ui_in[0];
       
@@ -61,17 +42,6 @@ module tt_um_3515_sequenceDetector (
     // Replicate ena to match the width of uio_oe
     assign ena_replicated = {8{ena}};
     assign uio_oe = ena_replicated; // Enable output only when ena is high
-
-    // Utilize the unused inputs
-    reg [7:0] ui_unused;
-    reg [7:0] uio_unused;
-
-    always @* begin
-        ui_in_internal = ui_in[7:1];
-        uio_in_internal = uio_in;
-        ui_unused = ui_in;
-        uio_unused = uio_in;
-    end
 
     always @(posedge clk or posedge rst_n) begin
         if (!rst_n) begin
