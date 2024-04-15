@@ -19,8 +19,7 @@
 
 module tt_um_3515_sequenceDetector (
 
-    input  wire [7:0] ui_in,    // Dedicated inputs
-    input  wire [7:0] uio_in,   // IOs: Input path
+    input  wire ui_in,    // Dedicated inputs
 
     output wire [7:0] uo_out,   // Dedicated outputs
     output wire [7:0] uio_out,  // IOs: Output path
@@ -34,7 +33,7 @@ module tt_um_3515_sequenceDetector (
     reg z;
     reg [7:0] ena_replicated; // Replicated version of ena to match width
       
-    wire x = ui_in[0];
+    wire x = ui_in;
       
     assign uo_out = seg;
     assign uio_out = 8'b0;
