@@ -32,43 +32,41 @@ module tt_um_3515_sequenceDetector (
     reg z;
     reg [7:0] ena_replicated; // Replicated version of ena to match width
 
-      reg [7:0] seg_test = uio_in[7:0];
-      reg [6:0] condition = ui_in[7:1];
-      
-      always @(*) begin
-          if (condition == 7'b1111111) begin
-              case (seg_test)
-                  8'b00000000 : seg = 8'b11111101;   // 0
-                  8'b00000001 : seg = 8'b11000001;   // 1
-                  8'b00000010 : seg = 8'b01101111;   // 2
-                  8'b00000011 : seg = 8'b11100111;   // 3
-                  8'b00000100 : seg = 8'b11010011;   // 4
-                  8'b00000101 : seg = 8'b10110111;   // 5
-                  8'b00000110 : seg = 8'b10111111;   // 6
-                  8'b00000111 : seg = 8'b11100001;   // 7
-                  8'b00001000 : seg = 8'b11111111;   // 8
-                  8'b00001001 : seg = 8'b11110111;   // 9
+    reg [7:0] seg_test = uio_in[7:0];
+    reg [6:0] condition = ui_in[6:0]; // Adjusted width to match ui_in range
 
-                  8'b11110000 : seg = 8'b10000000;
-                  8'b11110001 : seg = 8'b01000000;
-                  8'b11110010 : seg = 8'b00100000;
-                  8'b11110011 : seg = 8'b00010000;
-                  8'b11110100 : seg = 8'b00001000;
-                  8'b11110101 : seg = 8'b00000100;
-                  8'b11110110 : seg = 8'b00000010;
-                  8'b11110111 : seg = 8'b00000001;
-                    
-                  default    : seg = 8'b00000000;     // Default value if none of the above match
-              endcase
-          end
-          else begin
-              seg = 8'b00000000;  // Default value if condition is not met
-          end
-      end
+    always @(*) begin
+        if (condition == 7'b1111111) begin
+            case (seg_test)
+                8'b00000000 : seg = 8'b11111101;   // 0
+                8'b00000001 : seg = 8'b11000001;   // 1
+                8'b00000010 : seg = 8'b01101111;   // 2
+                8'b00000011 : seg = 8'b11100111;   // 3
+                8'b00000100 : seg = 8'b11010011;   // 4
+                8'b00000101 : seg = 8'b10110111;   // 5
+                8'b00000110 : seg = 8'b10111111;   // 6
+                8'b00000111 : seg = 8'b11100001;   // 7
+                8'b00001000 : seg = 8'b11111111;   // 8
+                8'b00001001 : seg = 8'b11110111;   // 9
+                  
+                8'b11110000 : seg = 8'b10000000;
+                8'b11110001 : seg = 8'b01000000;
+                8'b11110010 : seg = 8'b00100000;
+                8'b11110011 : seg = 8'b00010000;
+                8'b11110100 : seg = 8'b00001000;
+                8'b11110101 : seg = 8'b00000100;
+                8'b11110110 : seg = 8'b00000010;
+                8'b11110111 : seg = 8'b00000001;
+                default     : seg = 8'b00000000;     // Default value if none of the above match
+            endcase
+        end
+        else begin
+            seg = 8'b00000000;  // Default value if condition is not met
+        end
+    end
 
-      
     wire x = ui_in[0];
-      
+
     assign uo_out = seg;
     assign uio_out = 8'b0;
 
