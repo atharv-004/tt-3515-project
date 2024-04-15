@@ -32,8 +32,7 @@ module tt_um_3515_sequenceDetector (
     reg z;
       
     wire x = ui_in[0];
-    wire [6:1] ui_rest = ui_in[6:1]; // Rest of the inputs
-    
+      
     assign uo_out = seg;
     assign uio_out = 8'b0;
     assign uio_oe = ena; // Enable output only when ena is high
