@@ -28,7 +28,7 @@ module tt_um_3515_sequenceDetector (
     input  wire       rst_n     // reset_n - low to reset
 );
     reg [7:0] seg;
-    reg [1:0] PS, NS = 2'b00; // Initialize NS to avoid latch
+    reg [1:0] PS, NS; 
     reg z;
     reg [7:0] ena_replicated; // Replicated version of ena to match width
 
@@ -77,6 +77,7 @@ module tt_um_3515_sequenceDetector (
     always @(posedge clk or posedge rst_n) begin
         if (!rst_n) begin
             PS <= 2'b00; // S0
+            NS <= 2'b00;
             z <= 1'b0;
         end else begin
             if (ena) begin // Check if module is enabled
