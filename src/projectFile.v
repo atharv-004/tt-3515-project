@@ -32,8 +32,17 @@ module tt_um_3515_sequenceDetector (
     reg z;
     reg [7:0] ena_replicated; // Replicated version of ena to match width
 
+    wire x = ui_in[0];
+
+    assign uo_out = seg;
+    assign uio_out = 8'b0;
+
+    // Replicate ena to match the width of uio_oe
+    assign ena_replicated = {8{ena}};
+    assign uio_oe = ena_replicated; // Enable output only when ena is high
+      
     reg [7:0] seg_test = uio_in[7:0];
-      reg [6:0] condition = ui_in[7:1]; // Adjusted width to match ui_in range
+    reg [6:0] condition = ui_in[7:1]; // Adjusted width to match ui_in range
 
     always @(*) begin
         if (condition == 7'b1111111) begin
@@ -65,14 +74,7 @@ module tt_um_3515_sequenceDetector (
         end
     end
 
-    wire x = ui_in[0];
 
-    assign uo_out = seg;
-    assign uio_out = 8'b0;
-
-    // Replicate ena to match the width of uio_oe
-    assign ena_replicated = {8{ena}};
-    assign uio_oe = ena_replicated; // Enable output only when ena is high
 
     always @(posedge clk or posedge rst_n) begin
         if (!rst_n) begin
