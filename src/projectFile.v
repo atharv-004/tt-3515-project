@@ -35,9 +35,7 @@ module tt_um_3515_sequenceDetector (
 
     assign uo_out = seg;          // Connect 7-segment output to dedicated output
     assign uio_out = 8'b0;        // Connect all bits of uio_out to ground
-
-    // Replicate ena to match the width of uio_oe
-    assign uio_oe = {8{ena}};
+    assign uio_oe = 8'b0;
 
     reg [7:0] seg_test = uio_in[7:0]; // Extract 8-bit input for segment test
     reg [6:0] condition = ui_in[7:1]; // Adjusted width to match ui_in range
@@ -82,12 +80,10 @@ module tt_um_3515_sequenceDetector (
             PS <= 2'b00; // Initialize state to S0
             z <= 1'b0;   // Reset sequence detection flag
         end else begin
-            if (ena) begin // Check if module is enabled
-                PS <= NS; // Update state based on next state
-                // Set sequence detection flag if in state S3 and x is 1
-                z <= (PS == 2'b11) && (x == 1'b1);
-            end
-        end
+            PS <= NS; // Update state based on next state
+            // Set sequence detection flag if in state S3 and x is 1
+            z <= (PS == 2'b11) && (x == 1'b1);
+      end
     end
 
     // Next state logic for state machine
