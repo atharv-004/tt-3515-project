@@ -68,13 +68,11 @@ module tt_um_3515_sequenceDetector (
                 8'b11110111 : seg <= 8'b00000001;
                 default     : seg <= 8'b00000000;     // Default value if none of the above match
             endcase
+            case (z)
+               1'b0: seg <= 8'b00000010; // Display '-' on 7-segment (sequence not detected)
+               1'b1: seg <= 8'b11111111; // Display '8.' on 7-segment (sequence detected)
+           endcase;
         end
-        else begin
-            seg <= 8'b00000000;  // Default value if condition is not met
-        end
-    end
-
-
 
     always @(posedge clk) begin
         if (!rst_n) begin
@@ -95,13 +93,6 @@ module tt_um_3515_sequenceDetector (
             2'b10: NS <= x ? 2'b00 : 2'b11; // S2, Next state is S3 if x is 0, else return to S0
             2'b11: NS <= x ? 2'b00 : 2'b00; // S3, Always return to S0
         endcase
-    end
-
-      always @(posedge clk) begin
-        case (z)
-            1'b0: seg <= 8'b00000010; // Display '-' on 7-segment (sequence not detected)
-            1'b1: seg <= 8'b11111111; // Display '8.' on 7-segment (sequence detected)
-        endcase;
     end
 
 endmodule
