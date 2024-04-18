@@ -70,7 +70,7 @@ module tt_um_3515_sequenceDetector (
             endcase
         end
         else begin
-            seg = 8'b00000000;  // Default value if condition is not met
+            seg <= 8'b00000000;  // Default value if condition is not met
         end
     end
 
