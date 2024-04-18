@@ -44,7 +44,7 @@ module tt_um_3515_sequenceDetector (
     reg [7:0] seg_test = uio_in[7:0];
     reg [6:0] condition = ui_in[7:1]; // Adjusted width to match ui_in range
 
-    always @(*) begin
+      always @(posedge clk) begin
         if (condition == 7'b1111111) begin
             case (seg_test)
                 8'b00000000 : seg = 8'b11111101;   // 0
@@ -88,7 +88,7 @@ module tt_um_3515_sequenceDetector (
         end
     end
 
-    always @(*) begin
+      always @(posedge clk) begin
         case (PS)
             2'b00: NS = x ? 2'b01 : 2'b00; // S0, Next state is S1 if x is 1, else remain in S0
             2'b01: NS = x ? 2'b01 : 2'b10; // S1, Next state is S1 if x is 1, else transition to S2
@@ -97,7 +97,7 @@ module tt_um_3515_sequenceDetector (
         endcase
     end
 
-    always @(*) begin
+      always @(posedge clk) begin
         case (z)
             1'b0: seg = 8'b00000010; // Display '-' on 7-segment (sequence not detected)
             1'b1: seg = 8'b11111111; // Display '8.' on 7-segment (sequence detected)
