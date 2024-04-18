@@ -23,7 +23,7 @@ module tb ();
   wire [7:0] uio_oe;
 
   // Replace tt_um_example with your module name:
-  tt_um_3515_sequenceDetector (
+  tt_um_3515_sequenceDetector tt_um_3515_sequenceDetector(
 
       // Include power ports for the Gate Level test:
 `ifdef GL_TEST
@@ -40,39 +40,5 @@ module tb ();
       .clk    (clk),      // clock
       .rst_n  (rst_n)     // not reset
   );
-  // Test input generation
-  initial begin
-    x = 1'b0;
-    #5 x = 1'b0; #5 x = 1'b0; #5 x = 1'b0; #5 x = 1'b1;
-    #5 x = 1'b1; #5 x = 1'b1; #5 x = 1'b1; #5 x = 1'b0;
-    #5 x = 1'b0; #5 x = 1'b1; #5 x = 1'b0; #5 x = 1'b0; 
-    #5 x = 1'b0; #5 x = 1'b1; #5 x = 1'b1; #5 x = 1'b1; 
-    #5 x = 1'b1; #5 x = 1'b0; #5 x = 1'b0; #5 x = 1'b0; 
-    #5 x = 1'b1; #5 x = 1'b0; #5 x = 1'b0; #5 x = 1'b1; 
-    #5 x = 1'b1; #5 x = 1'b1; #5 x = 1'b1; #5 x = 1'b0; 
-    #5 x = 1'b0; #5 x = 1'b1; 
 
-    // Enable signal generation
-    enable = 1'b1;
-    #30 enable = 1'b0;
-  end
-
-  // Clock generation
-  always begin
-    #5 clk = ~clk;
-  end
-
-  // Reset generation
-  initial begin
-    clk = 1'b0;
-    reset = 1'b0;
-    #5 reset = 1'b0;
-    #5 reset = 1'b1;
-    #5 reset = 1'b0;
-  end
-
-  // Finish simulation
-  initial begin
-    #200 $finish;
-  end
 endmodule
