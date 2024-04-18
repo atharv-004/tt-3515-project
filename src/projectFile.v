@@ -73,6 +73,7 @@ module tt_um_3515_sequenceDetector (
                1'b1: seg <= 8'b11111111; // Display '8.' on 7-segment (sequence detected)
            endcase;
         end
+      end
 
     always @(posedge clk) begin
         if (!rst_n) begin
