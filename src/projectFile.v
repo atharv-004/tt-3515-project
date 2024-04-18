@@ -47,26 +47,26 @@ module tt_um_3515_sequenceDetector (
       always @(posedge clk) begin
         if (condition == 7'b1111111) begin
             case (seg_test)
-                8'b00000000 : seg = 8'b11111101;   // 0
-                8'b00000001 : seg = 8'b11000001;   // 1
-                8'b00000010 : seg = 8'b01101111;   // 2
-                8'b00000011 : seg = 8'b11100111;   // 3
-                8'b00000100 : seg = 8'b11010011;   // 4
-                8'b00000101 : seg = 8'b10110111;   // 5
-                8'b00000110 : seg = 8'b10111111;   // 6
-                8'b00000111 : seg = 8'b11100001;   // 7
-                8'b00001000 : seg = 8'b11111111;   // 8
-                8'b00001001 : seg = 8'b11110111;   // 9
+                8'b00000000 : seg <= 8'b11111101;   // 0
+                8'b00000001 : seg <= 8'b11000001;   // 1
+                8'b00000010 : seg <= 8'b01101111;   // 2
+                8'b00000011 : seg <= 8'b11100111;   // 3
+                8'b00000100 : seg <= 8'b11010011;   // 4
+                8'b00000101 : seg <= 8'b10110111;   // 5
+                8'b00000110 : seg <= 8'b10111111;   // 6
+                8'b00000111 : seg <= 8'b11100001;   // 7
+                8'b00001000 : seg <= 8'b11111111;   // 8
+                8'b00001001 : seg <= 8'b11110111;   // 9
                   
-                8'b11110000 : seg = 8'b10000000;
-                8'b11110001 : seg = 8'b01000000;
-                8'b11110010 : seg = 8'b00100000;
-                8'b11110011 : seg = 8'b00010000;
-                8'b11110100 : seg = 8'b00001000;
-                8'b11110101 : seg = 8'b00000100;
-                8'b11110110 : seg = 8'b00000010;
-                8'b11110111 : seg = 8'b00000001;
-                default     : seg = 8'b00000000;     // Default value if none of the above match
+                8'b11110000 : seg <= 8'b10000000;
+                8'b11110001 : seg <= 8'b01000000;
+                8'b11110010 : seg <= 8'b00100000;
+                8'b11110011 : seg <= 8'b00010000;
+                8'b11110100 : seg <= 8'b00001000;
+                8'b11110101 : seg <= 8'b00000100;
+                8'b11110110 : seg <= 8'b00000010;
+                8'b11110111 : seg <= 8'b00000001;
+                default     : seg <= 8'b00000000;     // Default value if none of the above match
             endcase
         end
         else begin
@@ -90,17 +90,17 @@ module tt_um_3515_sequenceDetector (
 
       always @(posedge clk) begin
         case (PS)
-            2'b00: NS = x ? 2'b01 : 2'b00; // S0, Next state is S1 if x is 1, else remain in S0
-            2'b01: NS = x ? 2'b01 : 2'b10; // S1, Next state is S1 if x is 1, else transition to S2
-            2'b10: NS = x ? 2'b00 : 2'b11; // S2, Next state is S3 if x is 0, else return to S0
-            2'b11: NS = x ? 2'b00 : 2'b00; // S3, Always return to S0
+            2'b00: NS <= x ? 2'b01 : 2'b00; // S0, Next state is S1 if x is 1, else remain in S0
+            2'b01: NS <= x ? 2'b01 : 2'b10; // S1, Next state is S1 if x is 1, else transition to S2
+            2'b10: NS <= x ? 2'b00 : 2'b11; // S2, Next state is S3 if x is 0, else return to S0
+            2'b11: NS <= x ? 2'b00 : 2'b00; // S3, Always return to S0
         endcase
     end
 
       always @(posedge clk) begin
         case (z)
-            1'b0: seg = 8'b00000010; // Display '-' on 7-segment (sequence not detected)
-            1'b1: seg = 8'b11111111; // Display '8.' on 7-segment (sequence detected)
+            1'b0: seg <= 8'b00000010; // Display '-' on 7-segment (sequence not detected)
+            1'b1: seg <= 8'b11111111; // Display '8.' on 7-segment (sequence detected)
         endcase;
     end
 
