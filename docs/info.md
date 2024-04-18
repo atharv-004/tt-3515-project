@@ -9,29 +9,19 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-- In this project, we have made a sequence detector using finite state machine (FSM)
+- In this project, we have designed a sequence detector using finite state machine (FSM)
 - It is designed using verilog, and detects sequence '1001'
-- The logic is made using cases, and it makes sure to detect the sequence while covering overlapping cases as well
+- The logic is made using cases, and it detects the sequence while covering overlapping cases as well
 
 ## How to test
 
 - If the sequence is detected, the output register z is set to logic 1 that displays '8.' on 7-segment display
-- If the sequence is not detected or the output register is 0, 7-segment display shows '-'
+- If the sequence is not detected (the output register is 0), 7-segment display shows '-'
 - LEDs can be tested in two ways when ui_in [7:1] is kept 7'b1111111 (status for testing - condition = 7'b1111111):
-    1. If first 4 bits of seg_test are 0 during testing, we can display numbers from 0 to 9 if we vary last 4 bits
-    2. If first 4 bits of seg_test are 1 during testing, we can display each led seperately by varying last 4 bits
+    1. If first 4 bits of seg_test (uio_in [7:4]) are 0 during testing, we can display numbers from 0 to 9 if we vary last 4 bits from 4'b0000 to 4'b1001
+    2. If first 4 bits of seg_test (uio_in [7:4]) are 1 during testing, we can display each led seperately by varying last 4 bits from 4'b0000 to 4'b0111
 
 ## External hardware
 
-- We need to use 8 LED display for 7-segment display output for seg ([7:0] uo_out) so that the output can be displayed and verified
+- We need to use 8 LED display for 7-segment display output seg ([7:0] uo_out), so that the output can be displayed and verified accordingly
 - In addition to this, we need to use an input source from which we can manipulate input logic onto the input register x (ui_in[0])
-- The numbering of LEDs is as below:
-      -- 3 --
-     |       |
-     4       2
-     |       |
-      -- 7 --
-     |       |
-     5       1
-     |       |
-      -- 6 --    . 8
