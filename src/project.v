@@ -76,7 +76,7 @@ module tt_um_3515_sequenceDetector (
 
 
 
-    always @(posedge clk or posedge rst_n) begin
+    always @(posedge clk) begin
         if (!rst_n) begin
             PS <= 2'b00; // S0
             z <= 1'b0;
